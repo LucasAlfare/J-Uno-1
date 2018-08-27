@@ -17,20 +17,7 @@ public class AlgoBusca {
             novosPontos[i] = pontos[i] - media;
         return novosPontos;
     }
-
-    public static int indiceMaiorValor(double[] pontos) {
-        double maiorValor = -Double.MAX_VALUE;
-        int indice = -1;
-        for (int i = 0; i < pontos.length; i++) {
-            if (pontos[i] > maiorValor) {
-                maiorValor = pontos[i];
-                indice = i;
-            }
-        }
-
-        return indice;
-    }
-
+    
     public static Tuple<Jogada, double[]> NMax(Uno jogo, int profundidade) {
         profundidade++;
 
