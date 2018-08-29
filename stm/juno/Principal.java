@@ -33,7 +33,7 @@ public class Principal {
         while(h.proximaJogada());
 
         System.out.println("NMax: Jogador ganhador: "+n.getIndiceGanhador()+", Média de nós explorados: "+n.valores/n.contagem+".");
-        System.out.println("NMax: Jogador ganhador: "+h.getIndiceGanhador()+", Média de nós explorados: "+h.valores/h.contagem+".");
+        System.out.println("HyperMax: Jogador ganhador: "+h.getIndiceGanhador()+", Média de nós explorados: "+h.valores/h.contagem+".");
 
     }
 
