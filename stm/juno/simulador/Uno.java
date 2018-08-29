@@ -50,6 +50,9 @@ public class Uno {
         totaisCartasAnteriores = new int[cobaia.jogadores.size()];
         System.arraycopy(cobaia.totaisCartasAnteriores, 0, totaisCartasAnteriores, 0,
                 cobaia.totaisCartasAnteriores.length);
+
+        valores = cobaia.valores;
+        contagem = cobaia.contagem;
     }
 
     public int getIndiceGanhador() {
@@ -213,7 +216,7 @@ public class Uno {
         Mensageiro.imprimir("Número de cartas na pilha de descarte: " + pilhaDescarte.size());
         Mensageiro.imprimir("Cartas do jogador atual: " + jogadores.getJogadorAtual().toString());
         Mensageiro.imprimir("Quantidade de jogadas possíveis: " + jogadasPossiveis.length);
-        Carta pc = pilhaCompra.proximaNaPilha();
+        //Carta pc = pilhaCompra.proximaNaPilha();
         //Mensageiro.imprimir("Próxima carta disponível para compra: " + (pc != null ? pc.toString() : "nenhuma"));
         for (Jogada j : jogadasPossiveis)
             Mensageiro.imprimir(j.toString());
@@ -267,8 +270,8 @@ public class Uno {
 
         if (jogadores.getIndiceJogadorAtual() == 0) {
             AlgoBusca.nosExplorados = 0;
-            escolha = AlgoBusca.NMax(this, 0).x;
-            //escolha = AlgoBusca.HyperMax(this, 0, AlgoBusca.getAlfa(jogadores.size())).x;
+            //escolha = AlgoBusca.NMax(this, 0).x;
+            escolha = AlgoBusca.hypermax(this, 0, AlgoBusca.getAlfa(jogadores.size())).x;
             valores += AlgoBusca.nosExplorados;
             contagem++;
         } else {
