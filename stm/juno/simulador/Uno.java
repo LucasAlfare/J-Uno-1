@@ -27,6 +27,9 @@ public class Uno {
     private int[] totaisCartasAnteriores;
     private int totalTurnos;
 
+    public int contagem;
+    public double valores;
+
     public Uno(int numJogadores) {
         pilhaCompra = new PilhaCompra(Carta.getBaralho());
         jogadores = new Jogadores(numJogadores, 7, this);
@@ -47,7 +50,6 @@ public class Uno {
         totaisCartasAnteriores = new int[cobaia.jogadores.size()];
         System.arraycopy(cobaia.totaisCartasAnteriores, 0, totaisCartasAnteriores, 0,
                 cobaia.totaisCartasAnteriores.length);
-
     }
 
     public int getIndiceGanhador() {
@@ -264,7 +266,11 @@ public class Uno {
         Jogada escolha;
 
         if (jogadores.getIndiceJogadorAtual() == 0) {
+            AlgoBusca.nosExplorados = 0;
             escolha = AlgoBusca.NMax(this, 0).x;
+            //escolha = AlgoBusca.HyperMax(this, 0, AlgoBusca.getAlfa(jogadores.size())).x;
+            valores += AlgoBusca.nosExplorados;
+            contagem++;
         } else {
             escolha = jogadasPossiveis[ThreadLocalRandom.current().nextInt(jogadasPossiveis.length)];
         }
