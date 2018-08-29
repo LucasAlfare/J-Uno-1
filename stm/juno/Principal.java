@@ -21,13 +21,30 @@ public class Principal {
             System.out.println(jogo.valores / jogo.contagem + " média de nós explorados, "
                     + (((double) i + 1) / numPartidas) * 100 + "% concluído.");
         }
-
         System.out.println(media / numPartidas + " média geral de nós explorados");
         System.out.println(Arrays.toString(vitorias));
     }
 
+    private static void comparativoHyperN(int numJogadores){
+
+        Uno jogoBase = new Uno(numJogadores);
+
+        var n = new Uno(jogoBase, true);
+        var h = new Uno(jogoBase, false);
+
+        while(n.proximaJogada());
+
+        while(h.proximaJogada());
+
+        System.out.println("NMax: Jogador ganhador: "+n.getIndiceGanhador()+", Média de nós explorados: "+n.valores/n.contagem+".");
+        System.out.println("HyperMax: Jogador ganhador: "+h.getIndiceGanhador()+", Média de nós explorados: "+h.valores/h.contagem+".");
+
+    }
+
     public static void main(String[] args) {
         Mensageiro.ativo = false;
-        jogarPartidas(100, 2);
+        //jogarPartidas(10, 2);
+
+        comparativoHyperN(2);
     }
 }
