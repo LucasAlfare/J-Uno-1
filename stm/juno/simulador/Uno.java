@@ -29,6 +29,7 @@ public class Uno {
 
     public int contagem;
     public double valores;
+    private boolean nMax;
 
     public Uno(int numJogadores) {
         pilhaCompra = new PilhaCompra(Carta.getBaralho());
@@ -37,6 +38,20 @@ public class Uno {
 
         pontuacoes = new double[numJogadores];
         totaisCartasAnteriores = new int[numJogadores];
+    }
+
+    public Uno(Uno cobaia, boolean nMax) {
+        this.nMax = nMax;
+        pilhaCompra = new PilhaCompra(cobaia.pilhaCompra);
+        jogadores = new Jogadores(cobaia.jogadores);
+        pilhaDescarte = new PilhaDescarte(cobaia.pilhaDescarte);
+
+        totalTurnos = cobaia.totalTurnos;
+        pontuacoes = new double[cobaia.jogadores.size()];
+        System.arraycopy(cobaia.pontuacoes, 0, pontuacoes, 0, cobaia.pontuacoes.length);
+        totaisCartasAnteriores = new int[cobaia.jogadores.size()];
+        System.arraycopy(cobaia.totaisCartasAnteriores, 0, totaisCartasAnteriores, 0,
+                cobaia.totaisCartasAnteriores.length);
     }
 
     public Uno(Uno cobaia) {
@@ -267,8 +282,11 @@ public class Uno {
 
         if (jogadores.getIndiceJogadorAtual() == 0) {
             AlgoBusca.nosExplorados = 0;
-            escolha = AlgoBusca.NMax(this, 0).x;
-            //escolha = AlgoBusca.HyperMax(this, 0, AlgoBusca.getAlfa(jogadores.size())).x;
+            if (nMax) {
+                escolha = AlgoBusca.NMax(this, 0).x;
+            } else {
+                escolha = AlgoBusca.HyperMax(this, 0, AlgoBusca.getAlfa(jogadores.size())).x;
+            }
             valores += AlgoBusca.nosExplorados;
             contagem++;
         } else {
