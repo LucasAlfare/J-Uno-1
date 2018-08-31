@@ -25,19 +25,18 @@ public class Principal {
         System.out.println(Arrays.toString(vitorias));
     }
 
-    private static void comparativoHyperN(int numJogadores){
+    private static void comparativoHyperN(int numJogadores) {
 
         Uno jogoBase = new Uno(numJogadores);
 
-        var n = new Uno(jogoBase, true);
-        var h = new Uno(jogoBase, false);
-
-        while(n.proximaJogada());
-
-        while(h.proximaJogada());
-
-        System.out.println("NMax: Jogador ganhador: "+n.getIndiceGanhador()+", Média de nós explorados: "+n.valores/n.contagem+".");
-        System.out.println("HyperMax: Jogador ganhador: "+h.getIndiceGanhador()+", Média de nós explorados: "+h.valores/h.contagem+".");
+        for (int i = 0; i < 2; i++) {
+            String busca = i == 0 ? "NMax" : "Hypermax";
+            System.out.println("Jogando utilizando " + busca);
+            Uno jogo = new Uno(jogoBase, i == 0);
+            while (jogo.proximaJogada()) ;
+            System.out.println(busca + ": jogador ganhador: " + jogo.getIndiceGanhador()
+                    + ", média de nós explorados: " + jogo.valores / jogo.contagem);
+        }
 
     }
 

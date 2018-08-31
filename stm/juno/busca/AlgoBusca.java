@@ -59,9 +59,8 @@ public class AlgoBusca {
 
     public static double[] getAlfa(int tamanho) {
         double[] a = new double[tamanho];
-        for (int i = 0; i < tamanho; i++) {
+        for (int i = 0; i < tamanho; i++)
             a[i] = -Double.MAX_VALUE;
-        }
         return a;
     }
 

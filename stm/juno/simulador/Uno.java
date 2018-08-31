@@ -288,7 +288,7 @@ public class Uno {
             if (nMax) {
                 escolha = AlgoBusca.NMax(this, 0).x;
             } else {
-                escolha = AlgoBusca.HyperMax(this, 0, AlgoBusca.getAlfa(jogadores.size())).x;
+                escolha = AlgoBusca.hypermax(this, 0, AlgoBusca.getAlfa(jogadores.size())).x;
             }
             valores += AlgoBusca.nosExplorados;
             contagem++;
