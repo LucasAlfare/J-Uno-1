@@ -41,20 +41,6 @@ public class Uno {
         totaisCartasAnteriores = new int[numJogadores];
     }
 
-    public Uno(Uno cobaia, boolean nMax) {
-        this.nMax = nMax;
-        pilhaCompra = new PilhaCompra(cobaia.pilhaCompra);
-        jogadores = new Jogadores(cobaia.jogadores);
-        pilhaDescarte = new PilhaDescarte(cobaia.pilhaDescarte);
-
-        totalTurnos = cobaia.totalTurnos;
-        pontuacoes = new double[cobaia.jogadores.size()];
-        System.arraycopy(cobaia.pontuacoes, 0, pontuacoes, 0, cobaia.pontuacoes.length);
-        totaisCartasAnteriores = new int[cobaia.jogadores.size()];
-        System.arraycopy(cobaia.totaisCartasAnteriores, 0, totaisCartasAnteriores, 0,
-                cobaia.totaisCartasAnteriores.length);
-    }
-
     public Uno(Uno cobaia) {
         pilhaCompra = new PilhaCompra(cobaia.pilhaCompra);
         jogadores = new Jogadores(cobaia.jogadores);
@@ -69,6 +55,11 @@ public class Uno {
 
         valores = cobaia.valores;
         contagem = cobaia.contagem;
+    }
+
+    public Uno(Uno cobaia, boolean nMax) {
+        this(cobaia);
+        this.nMax = nMax;
     }
 
     public int getIndiceGanhador() {
@@ -108,15 +99,10 @@ public class Uno {
         }
 
         if (!mesmaCorEncontrada && indiceComprarQuatro > -1)
-            cartasUnicas.put(Carta.CURINGA_COMPRAR_QUATRO, indiceComprarQuatro);
+            resultados.add(0, indiceComprarQuatro);
 
-        for (Carta carta : cartasUnicas.keySet()) {
-            if (carta.equals(Carta.CURINGA_COMPRAR_QUATRO)) {
-                resultados.add(0, cartasUnicas.get(carta));
-            } else {
-                resultados.add(cartasUnicas.get(carta));
-            }
-        }
+        for (Carta carta : cartasUnicas.keySet())
+            resultados.add(cartasUnicas.get(carta));
 
         return resultados.toArray(new Integer[0]);
     }

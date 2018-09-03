@@ -42,8 +42,8 @@ public class Principal {
 
     public static void main(String[] args) {
         Mensageiro.ativo = false;
-        jogarPartidas(20, 2);
+        //jogarPartidas(1, 2);
 
-        //comparativoHyperN(2);
+        comparativoHyperN(2);
     }
 }
