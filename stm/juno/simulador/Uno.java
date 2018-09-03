@@ -55,6 +55,7 @@ public class Uno {
 
         valores = cobaia.valores;
         contagem = cobaia.contagem;
+        nMax = cobaia.nMax;
     }
 
     public Uno(Uno cobaia, boolean nMax) {
