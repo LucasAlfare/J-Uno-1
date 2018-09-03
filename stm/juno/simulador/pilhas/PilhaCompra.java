@@ -1,6 +1,5 @@
 package stm.juno.simulador.pilhas;
 
-import stm.juno.diversos.Mensageiro;
 import stm.juno.simulador.Uno;
 import stm.juno.simulador.cartas.Carta;
 
@@ -37,7 +36,7 @@ public class PilhaCompra extends ArrayList<Carta> {
             if (topo != null)
                 add(topo);
 
-            Mensageiro.imprimir("Pilha de compra foi reabastecida com a pilha de descarte");
+            //Mensageiro.imprimir("Pilha de compra foi reabastecida com a pilha de descarte");
         }
 
         for (int i = 0; i < numCartas; i++)

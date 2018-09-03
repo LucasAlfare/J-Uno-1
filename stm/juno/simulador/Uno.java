@@ -13,6 +13,7 @@ import stm.juno.simulador.pilhas.PilhaDescarte;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.DoubleStream;
@@ -82,6 +83,7 @@ public class Uno {
 
     private Integer[] getIndicesCartasCompativeis(Carta cartaTeste, CorCarta corTeste) {
         List<Integer> resultados = new ArrayList<>();
+        HashMap<Carta, Integer> cartasUnicas = new HashMap<>();
         boolean mesmaCorEncontrada = false;
         int indiceComprarQuatro = -1;
 
@@ -92,20 +94,29 @@ public class Uno {
                 indiceComprarQuatro = i;
             } else if (!c.getTipo().equals(TipoCarta.CURINGA_COMPRAR_QUATRO)) {
                 if (c.getCor() != null && c.getCor().equals(corTeste)) {
-                    mesmaCorEncontrada = resultados.add(i);
+                    cartasUnicas.put(c, i);
+                    mesmaCorEncontrada = true;
                 } else if (cartaTeste != null) {
                     boolean curinga = c.getTipo().equals(TipoCarta.CURINGA),
                             mesmoTipo = c.getTipo().equals(cartaTeste.getTipo()),
                             numero = c.getTipo().equals(TipoCarta.NUMERO),
                             mesmoValor = c.getValor() == cartaTeste.getValor();
                     if (curinga || ((mesmoTipo && !numero) || (numero && mesmoValor)))
-                        resultados.add(i);
+                        cartasUnicas.put(c, i);
                 }
             }
         }
 
         if (!mesmaCorEncontrada && indiceComprarQuatro > -1)
-            resultados.add(0, indiceComprarQuatro);
+            cartasUnicas.put(Carta.CURINGA_COMPRAR_QUATRO, indiceComprarQuatro);
+
+        for (Carta carta : cartasUnicas.keySet()) {
+            if (carta.equals(Carta.CURINGA_COMPRAR_QUATRO)) {
+                resultados.add(0, cartasUnicas.get(carta));
+            } else {
+                resultados.add(cartasUnicas.get(carta));
+            }
+        }
 
         return resultados.toArray(new Integer[0]);
     }

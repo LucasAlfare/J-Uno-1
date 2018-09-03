@@ -68,7 +68,7 @@ public class AlgoBusca {
         profundidade++;
         nosExplorados++;
 
-        if (jogo.getIndiceGanhador() != -1 || profundidade == 20) {
+        if (jogo.getIndiceGanhador() != -1 || profundidade == 25) {
             return new Tuple<>(new Jogada(), subtrairMedia(jogo.getPontuacoes()));
         } else {
             Tuple<Jogada, double[]> melhorJogada = null;
